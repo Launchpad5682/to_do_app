@@ -1,9 +1,10 @@
 import React from "react";
-
+// delete the tasks which are completed
 export default class Task extends React.Component {
   state = {
     loading: true,
     tasks: null,
+    done: true,
   };
 
   async componentDidMount() {
@@ -14,9 +15,18 @@ export default class Task extends React.Component {
     this.setState({ tasks: data[0].task, loading: false });
   }
 
+  handleCheck = (event) => {
+    this.setState({ done: event.target.checked });
+  };
+
   render() {
     return (
       <dir className="task">
+        <input
+          type="checkbox"
+          value={this.state.done}
+          onChange={this.handleCheck}
+        ></input>
         {this.state.loading || !this.state.tasks ? (
           <div>loading....</div>
         ) : (

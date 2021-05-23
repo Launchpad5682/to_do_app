@@ -1,9 +1,5 @@
 import React from "react";
 
-export default class ProtoButton extends React.Component{
-    render(){
-        return (
-            <button>Delete</button>
-        );
-    }
+export default function ProtoButton() {
+  return <button>{this.props.buttonText}</button>;
 }

@@ -1,21 +1,13 @@
 import "./App.css";
 import React, { Component } from "react";
-import InputBox from "./components/input";
-import ProtoButton from "./components/button";
-import Task from "./components/task";
+import Canvas from "./components/canvas";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <InputBox />
-        <ProtoButton />
-        <ProtoButton />
-        <ProtoButton />
-        <Task />
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div className="App">
+      <Canvas />
+    </div>
+  );
 }
 
 export default App;
