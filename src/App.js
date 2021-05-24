@@ -1,4 +1,5 @@
-import "./App.css";
+//import "./App.css";
+import "./assets/main.css";
 import Canvas from "./components/canvas";
 
 function App() {
