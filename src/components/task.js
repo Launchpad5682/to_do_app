@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import CheckBox from "./checkbox";
+import DeleteIcon from "./deleteIcon";
 // delete the tasks which are completed
 
 export default function Task() {
@@ -17,11 +19,15 @@ export default function Task() {
 
   return (
     <dir className="task">
-      <input type="checkbox" value={done}></input>
       {loading || !tasks ? (
         <div>loading....</div>
       ) : (
-        tasks.map((task) => <div key={task["_id"]["$oid"]}>{task.task}</div>)
+        tasks.map((task) => (
+          <div key={task["_id"]["$oid"]}>
+            <CheckBox />
+            {task.task} <DeleteIcon />
+          </div>
+        ))
       )}
     </dir>
   );
