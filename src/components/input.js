@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 // shouldn't be empty
-export default function InputBox() {
+export default function InputBox(props) {
   const [task, setData] = useState("");
+  const { items, setItems } = props;
 
   const addTask = () => {
     fetch("http://127.0.0.1:5555/add_task", {
@@ -15,6 +16,8 @@ export default function InputBox() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
+        // adding the items or tasks to the Tasks list
+        setItems([...items, { _id: { data }, task: task, done: false }]);
       })
       .catch((error) => {
         console.error("Error:", error);
