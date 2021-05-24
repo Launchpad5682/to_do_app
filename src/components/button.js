@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function ProtoButton() {
-  return <button>{this.props.buttonText}</button>;
+export default function ProtoButton(props) {
+  return <button>{props.buttonText}</button>;
 }

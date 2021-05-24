@@ -1,5 +1,4 @@
 import "./App.css";
-import React, { Component } from "react";
 import Canvas from "./components/canvas";
 
 function App() {
