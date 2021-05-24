@@ -1,38 +1,47 @@
-import React from "react";
-
-const initialState = {
-  task: "",
-};
-
+import React, { useEffect, useState } from "react";
 // shouldn't be empty
-export default class InputBox extends React.Component {
-  state = initialState;
+export default function InputBox() {
+  const [task, setData] = useState("");
 
-  handleChange = (event) => {
-    const isCheckBox = event.target.type === "checkbox";
-    this.setState({
-      [event.target.name]: isCheckBox
-        ? event.target.checked
-        : event.target.value,
-    });
+  const addTask = () => {
+    fetch("http://127.0.0.1:5555/add_task", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ task: task, done: false }),
+      mode: "cors",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
-  handleSubmit = (event) => {
+  const handleChange = (event) => {
+    console.log(event.target.value, task);
+    setData(event.target.value);
+    console.log(event.target.value, task);
+  };
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state);
-    this.setState(initialState);
+    addTask();
+    setData("");
   };
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          name="task"
-          value={this.state.task}
-          onChange={this.handleChange}
-        ></input>
-        <button type="submit">Add Task</button>
-      </form>
-    );
-  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="task"
+        value={task}
+        onChange={handleChange}
+      ></input>
+      <button type="submit">Add Task</button>
+    </form>
+  );
 }
