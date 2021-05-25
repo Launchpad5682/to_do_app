@@ -4,7 +4,10 @@ import Canvas from "./components/canvas";
 
 function App() {
   return (
-    <div className="App">
+    <div>
+      <h1>
+        <center>To Do List</center>
+      </h1>
       <Canvas />
     </div>
   );
