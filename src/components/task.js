@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
-import CheckBox from "./checkbox";
+import React from "react";
 import DeleteIcon from "./deleteIcon";
+import EditIcon from "./editIcon";
 // delete the tasks which are completed
 
 export default function Task(props) {
   return (
-    <dir className="task">
-      <CheckBox />
-      {props.items.task} <DeleteIcon />
+    // <CheckBox />
+    <dir
+      className="max-w-sm rounded overflow-hidden shadow-lg"
+      style={{ backgroundColor: "green", padding: "1em" }}
+    >
+      {props.items.task}
+      <EditIcon handleUpdate={props.handleUpdate} />
+      <DeleteIcon handleDelete={props.handleDelete} />
     </dir>
   );
 }
