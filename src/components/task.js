@@ -6,10 +6,7 @@ import EditIcon from "./editIcon";
 export default function Task(props) {
   return (
     // <CheckBox />
-    <dir
-      className="max-w-sm rounded overflow-hidden shadow-lg"
-      style={{ backgroundColor: "green", padding: "1em" }}
-    >
+    <dir className="max-w-sm rounded overflow-hidden shadow-lg bg-purple-200">
       {props.items.task}
       <EditIcon handleUpdate={props.handleUpdate} />
       <DeleteIcon handleDelete={props.handleDelete} />
