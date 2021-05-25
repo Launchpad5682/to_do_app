@@ -21,24 +21,72 @@ export default function Canvas() {
         console.log(err);
       });
   }, []);
+  // [] are dependencies
+
+  const handleDelete = (id) => {
+    // delete task
+    // delete request and delete item from the tasks list
+
+    let element = tasks.filter((x) => {
+      return x["_id"]["$oid"] !== id;
+    });
+
+    setTasks(element);
+
+    let url = "http://127.0.0.1:5555/delete_one/" + id;
+
+    fetch(url, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+    })
+      .then((res) => res.json())
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleUpdate = (id) => {
+    alert();
+    console.log("Update ", id);
+  };
+
+  /*
+  <ProtoButton buttonText="Delete Task" />
+  <ProtoButton buttonText="Delete All the Tasks" />
+  */
 
   return (
-    <dir className="canvas">
-      <InputBox items={tasks} setItems={setTasks} />
-      <ProtoButton buttonText="Delete Task" />
-      <ProtoButton buttonText="Delete All the Tasks" />
+    <dir
+      className="canvas"
+      style={{
+        backgroundColor: "teal",
+        padding: "1em",
+        height: "800px",
+        width: "1800px",
+      }}
+    >
+      <div>
+        <InputBox items={tasks} setItems={setTasks} />
+      </div>
       {!tasks ? (
         <div>loading....</div>
       ) : (
-        tasks.map((task_item) => {
-          return <Task key={task_item["_id"]["$oid"]} items={task_item} />;
-        })
+        <div className="container mx-auto">
+          <div className="grid grid-cols-3 gap-4">
+            {tasks.map((task_item) => {
+              return (
+                <Task
+                  key={task_item["_id"]["$oid"]}
+                  items={task_item}
+                  handleDelete={() => handleDelete(task_item["_id"]["$oid"])}
+                  handleUpdate={() => handleUpdate(task_item["id"]["$oid"])}
+                />
+              );
+            })}
+          </div>
+        </div>
       )}
     </dir>
   );
 }
-
-/*
- {tasks.map((task) => {
-        return <Task key={task["_id"]["$oid"]} task={task} />;
-      })}*/
